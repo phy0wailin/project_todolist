@@ -1,0 +1,29 @@
+{% extends 'tasks/layout.html' %}
+
+
+{% block body %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'tasks/styles.css'%}">
+    <h1>Tasks</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>{{task}}</li>
+        {% empty %}
+                <li>No task</li>
+        {% endfor %}
+    </ul>
+    <form action="/su/submit" method="post">
+        {% csrf_token %}
+        <button type="button" id="pop">Pop</button>
+        <input type="text" placeholder="Task" autofocus autocomplete="off" name="task">
+        <input type="submit">
+    </form>
+
+    <script>
+        function strip(){
+            fetch("pu/pop");
+        }
+        document.querySelector("#pop").onclick = strip;
+        
+    </script>
+{% endblock %}
